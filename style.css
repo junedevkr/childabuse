@@ -42,6 +42,11 @@ h3 {
   color: rgb(182, 182, 182);
 }
 
+h3.h3red {
+  font-size: 1.5rem;
+  color: #9dff00;
+}
+
 h4 {
   font-size: 1.0rem;
   color: rgb(182, 182, 182);
@@ -57,6 +62,13 @@ h6 {
   color: rgb(182, 182, 182);
 }
 
+a {
+  color: rgb(182, 182, 182);
+}
+
+a:hover {
+  color: white;
+}
 
 .container {
   display: flex;
@@ -97,6 +109,9 @@ h6 {
   background-color: white;
 }
 
+.data-output {
+  display: inline;
+}
 
 /* 스마트폰 */
 @media (max-width: 767px) {

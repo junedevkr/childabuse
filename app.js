@@ -1,108 +1,25 @@
-const onGAPILoad = async () => {
-  await gapi.client.init({
-    apiKey: 'AIzaSyB08ejkEhqLAlHYDzSbqkl',
-    clientId: '749711979920-2t5ip02556cbojn4u2k7q9ar9e8kjtqh.apps.googleusercontent.com',
-    scope: 'https://www.googleapis.com/auth/drive.file',
-    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+function start() {
+  gapi.load('client', function() {
+    // API를 사용하려면 sheetApi.js 파일에 저장된 API 키를 대체하세요.
+    gapi.client.setApiKey('AIzaSyBGVBkEXJc3KkCsBDCmusiAhY8PEUbpNhI');
+    gapi.client.load('sheets', 'v4', function() {
+      getData();
+    });
   });
-
-gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
-
-updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-};
-
-const updateSignInStatus = (isSignedIn) => {
-  if (isSignedIn) {
-    $('#signin').hide();
-    $('#file-input').show();
-    $('#file-input').on('change', handleFileUpload);
-  } else {
-    $('#signin').show();
-    $('#signin').on('click', () => gapi.auth2.getAuthInstance().signIn());
-  }
-};
-
-const findOrCreateFolder = async (folderName) => {
-  const query = `mimeType='application/vnd.google-apps.folder' and trashed=false and name='${folderName}'`;
-  let folders;
-
-  try {
-    const response = await gapi.client.drive.files.list({
-      q: query,
-      fields: 'nextPageToken, files(id, name)',
-    });
-
-    folders = response.result.files;
-  } catch (error) {
-    console.error('Error finding folder:', error);
-  }
-
-  let folderId;
-
-  if (folders && folders.length === 0) {
-    try {
-      const metadata = {
-        name: folderName,
-        mimeType: 'application/vnd.google-apps.folder',
-      };
-
-      const response = await gapi.client.drive.files.create({ resource: metadata });
-      folderId = response.result.id;
-
-      console.log(`Created new folder ${folderName} with ID: ${folderId}`);
-    } catch (error) {
-      console.error('Error creating new folder:', error);
-    }
-  }else{
-    folderId = folders[0].id;
-  }
-
-  return folderId;
-};
-
-const handleFileUpload = async (event) => {
-  const file = event.target.files[0];
-
-  if (file.type !== 'application/pdf') {
-    alert('PDF 파일만 업로드해 주세요!');
-    return;
-  }
-
-  const folderId = await findOrCreateFolder('PDF_Uploads');
-
-  const metadata = {
-    name: file.name,
-    mimeType: file.type,
-    parents: [folderId],
-  };
-
-  try {
-    const accessToken = gapi.auth.getToken().access_token;
-    const form = new FormData();
-    form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-    form.append('file', file);
-
-    const response = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-      method: 'POST',
-      headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
-      body: form,
-    });
-
-    const jsonResponse = await response.json();
-    console.log(`File uploaded successfully: ID - ${jsonResponse.id}`);
-  } catch (error) {
-    console.error('Error uploading file:', error);
-  }
-};
-
-gapi.load('client:auth2', onGAPILoad);
-
-
-onload=function()
-{
-var frame_view = document.getElementsByTagName('iframe');
-for(var i = 0 ; i < frame_view.length ; i++)
-{
-frame_view[i].setAttribute("allowTransparency","true");
 }
+
+function getData() {
+  // 스프레드시트의 ID와 범위를 고정해 놓았지만, 필요하면 수정할 수 있습니다.
+  var spreadsheetId = '1_5nQoggV38Y62T5JQfdOUL1RtxFaO6cdQFhh7IEsOlc';
+  var range = 'Sheet1!A1:A'; // 이 부분을 수정하여 원하는 시트 및 범위를 가져옵니다.
+
+  gapi.client.sheets.spreadsheets.values.get({
+    spreadsheetId: spreadsheetId,
+    range: range
+  }).then(function(response) {
+    var numRows = response.result.values.length;
+    document.getElementById('data-output').innerHTML = "현재 접수된 신고서 " + numRows + " 건";
+  }, function(response) {
+    console.error('Error occurred: ' + response.result.error.message);
+  });
 }
