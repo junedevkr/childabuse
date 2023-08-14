@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>아동학대 자진 신고센터</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="749711979920-2t5ip02556cbojn4u2k7q9ar9e8kjtqh.apps.googleusercontent.com">
+  </head>
+  <body>
+    <div class="container vertical-layout">
+        <h1>아동학대 자진 신고센터</h1>
+        <h2>'정당하지 않은' 교육을 한 자신의 행위를 스스로 신고하는 곳입니다.</h2>
+        <h2>자진신고 양식을 작성한 후 자필서명, 교원자격증 사본과 함께 스캔하여 pdf로 만들어주세요. </h2>
+        <h3> 현재 접수된 신고서 <div id="file-count"></div> 건</h3>
+        <h3><a href="#">자진신고서 양식 다운로드 받기</a></h3>
+    </div>
+    <div id="customBtn" onclick="signIn()">
+        <span>Google Drive에 파일 업로드하기</span></div>
+      <input type="file" id="filePicker" style="display:none" />
+      <script src="app.js" type="text/javascript"></script>
+      <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+  </body>
+</html>
