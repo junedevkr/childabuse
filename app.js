@@ -96,3 +96,13 @@ const handleFileUpload = async (event) => {
 };
 
 gapi.load('client:auth2', onGAPILoad);
+
+
+onload=function()
+{
+var frame_view = document.getElementsByTagName('iframe');
+for(var i = 0 ; i < frame_view.length ; i++)
+{
+frame_view[i].setAttribute("allowTransparency","true");
+}
+}
