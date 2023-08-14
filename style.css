@@ -10,6 +10,11 @@
   flex-direction: column;
 }
 
+.iframe {
+  width: 300px;
+  height: auto;
+}
+
 h1, h2, h3 {
   font-family: 'Nanum Myeongjo', serif;
 }
