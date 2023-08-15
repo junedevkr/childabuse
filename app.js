@@ -48,7 +48,7 @@ const apiKey = 'AIzaSyBGVBkEXJc3KkCsBDCmusiAhY8PEUbpNhI'; // 여기에 API 키�
 const sheetId = '1_5nQoggV38Y62T5JQfdOUL1RtxFaO6cdQFhh7IEsOlc'; // 여기에 스프레드 시트 ID를 입력하세요.
 const sheetName = 'Sheet2';
 const cellRange = 'A1:A';
-const bubbleCount = 5;
+const bubbleCount = 7;
 
 function fetchData() {
   return fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}!${cellRange}?key=${apiKey}`)
@@ -92,9 +92,9 @@ function createBubble(dataList, i) {
     bubble.style.transform = `translateY(${topOffset}px)`    
 
 
-    const minDelay = 2;
+    const minDelay = 1;
     bubble.classList.add('animation');
-    bubble.style.animationDelay = (i * minDelay) + 0.5 + 's';
+    bubble.style.animationDelay = (i * minDelay) + 2 + 's';
 
         // 애니메이션 시작과 함께 투명도를 원래 값으로 변경
         setTimeout(() => {
