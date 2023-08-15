@@ -118,8 +118,41 @@ a:hover {
 }
 
 .footer {
-  color: red;
   display:block;
+}
+
+/* bubbles */
+.bubble-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -30px;
+  opacity: 0;
+  animation: floatBubble 5s linear forwards;
+}
+
+@keyframes floatBubble {
+  0% {
+    bottom: -30px;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 100%;
+    opacity: 0;
+  }
 }
 
 /* 스마트폰 */
