@@ -7,19 +7,20 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="app.js" defer></script>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
     <meta name="google-signin-client_id" content="749711979920-2t5ip02556cbojn4u2k7q9ar9e8kjtqh.apps.googleusercontent.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body onload="start()">
+  <body>
     <div class="container">
     <div class="container vertical-layout">
         <h1>나는 아동학대 교사입니다</h1>
-        <h3>'정당하지 않은' 자신의 교육 행위를 <br> 스스로 신고하는 곳입니다.</h3>
-        <h3> 아래 자진신고 양식을 작성한 후 제출해 주세요.</h3>
-        <h3 class="h3red"><div id="data-output"></div><br></h3>
+        <h3>'정당하지 않은' 자신의 교육 행위를 <br> 스스로 신고하는 곳입니다.<br>
+        아래 신고서를 작성한 후 제출해 주세요.</h3>
+        <h3 class="h3red"><div id="data-output"></div><br>
+        <a href="./report.html">리포트 보러가기</a></h3>
       <div class="border">
         <h2>나의 신고서 접수하기</h2>
         <h4>구글 로그인이 필요합니다.</h4>
@@ -28,6 +29,6 @@
       </div>
 
     </div>
-    <!-- footer -->
+    <div id="footer-container"></div>
   </body>
 </html>
