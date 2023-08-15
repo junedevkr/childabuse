@@ -168,21 +168,39 @@ a:hover {
 
 @keyframes floatBubble {
   0% {
-    bottom: 10%;
+    bottom: -100%;
     opacity: 0;
   }
 
   10% {
-    opacity: 0.8;
+    bottom: 10%;
+    opacity: 0;
   }
 
-  40% {
+  25% {
+    bottom: 25%;
+    opacity: 0.3;
+  }
+
+  50% {
+    bottom: 50%;
     opacity: 1;
   }
 
-  100% {
-    opacity: 0;
+
+  75% {
+    bottom: 75%;
+    opacity: 0.3;
+  }
+
+  90% {
     bottom: 90%;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 100%;
+    opacity: 0;
   }
 }
 /* 스마트폰 */
