@@ -89,11 +89,8 @@ a:hover {
   align-items: center;
   position: relative;
   z-index: 1;
-  min-height: 80%;
-  overflow: auto;
   margin: auto;
   margin-top: 2vh;
-  max-height: 100vh;
   text-align: center;
 }
 
@@ -113,11 +110,6 @@ a:hover {
   flex-direction: column;
 }
 
-.content-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
 
 .border {
   width: 90vw;
@@ -139,6 +131,7 @@ a:hover {
 }
 
 .footer {
+  display:flex;
   text-align: center;
 }
 
@@ -165,6 +158,16 @@ a:hover {
 .animation {
   animation: floatBubble 5s linear forwards;
 }
+
+@keyframes bubble {
+  0% {
+      transform: translateY(100%);
+  }
+  100% {
+      transform: translateY(calc(-100% - var(--endY))); /* 종료 위치를 상단 0~20% 사이의 랜덤 값으로 변경 */
+  }
+}
+
 
 @keyframes floatBubble {
   0% {
