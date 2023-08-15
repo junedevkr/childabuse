@@ -82,9 +82,10 @@ function createBubble(dataList, i) {
     const maxWidthPercentage = 100 - (bubble.offsetWidth / bubbleContainerEl.offsetWidth) * 100;
     bubble.style.left = Math.random() * maxWidthPercentage + '%';
   
+    const minDelay = 4;
     bubble.classList.add('animation');
-    bubble.style.animationDelay = (i * 10) + 's';
-    bubble.style.animationDuration = (Math.random() * 10 + 13) + 's';
+    bubble.style.animationDelay = (i * minDelay) + 's';
+    bubble.style.animationDuration = (Math.random() * 15 + 16) + 's';
   }, 100);
 
   bubble.addEventListener('animationend', function() {
