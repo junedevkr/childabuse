@@ -77,7 +77,7 @@ function createBubble(dataList, i) {
   document.getElementById('bubble-container').appendChild(bubble);
 
   // 화면 외부에 버블 배치
-  bubble.style.top = '100%';
+  bubble.style.top = '120%';
 
   setTimeout(function() {
     const bubbleContainerEl = document.getElementById('bubble-container');
