@@ -85,8 +85,14 @@ function createBubble(dataList, i) {
     const bubbleContainerEl = document.getElementById('bubble-container');
     const maxWidthPercentage = 100 - (bubble.offsetWidth / bubbleContainerEl.offsetWidth) * 100;
     bubble.style.left = Math.random() * maxWidthPercentage + '%';
-  
-    const minDelay = 3;
+
+    // Y축 상의 겹치지 않는 간격 유지 (버블 높이의 1.5배)
+    const nonOverlappingSpacing = 1.5 * bubble.offsetHeight;
+    const topOffset = nonOverlappingSpacing * i;
+    bubble.style.transform = `translateY(${topOffset}px)`    
+
+
+    const minDelay = 2;
     bubble.classList.add('animation');
     bubble.style.animationDelay = (i * minDelay) + 0.5 + 's';
 
