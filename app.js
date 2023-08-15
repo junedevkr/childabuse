@@ -9,7 +9,7 @@ function start() {
 }
 
 function getData() {
-  var range = 'Sheet1!A2:A'; // 이 부분을 수정하여 원하는 시트 및 범위를 가져옵니다.
+  var range = 'Sheet1!A1:A'; // 이 부분을 수정하여 원하는 시트 및 범위를 가져옵니다.
 
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: '1_5nQoggV38Y62T5JQfdOUL1RtxFaO6cdQFhh7IEsOlc',
