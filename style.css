@@ -83,6 +83,20 @@ a:hover {
   text-align: center;
 }
 
+.container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  min-height: 80%;
+  overflow: auto;
+  margin: auto;
+  margin-top: 2vh;
+  max-height: 100vh;
+  text-align: center;
+}
+
 .overlay {
   background-repeat: no-repeat;
   background-size: cover;

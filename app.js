@@ -76,24 +76,23 @@ function createBubble(dataList, i) {
 
   document.getElementById('bubble-container').appendChild(bubble);
 
-    // 버블 생성 시 투명처리
-    bubble.style.opacity = '0';
-
   // 화면 외부에 버블 배치
-  bubble.style.transform = 'translateY(120%)';
+  bubble.style.transform = 'translateY(100%)';
+  bubble.style.opacity = '0';
+
 
   setTimeout(function() {
     const bubbleContainerEl = document.getElementById('bubble-container');
     const maxWidthPercentage = 100 - (bubble.offsetWidth / bubbleContainerEl.offsetWidth) * 100;
     bubble.style.left = Math.random() * maxWidthPercentage + '%';
   
-    const minDelay = 4;
+    const minDelay = 3;
     bubble.classList.add('animation');
-    bubble.style.animationDelay = (i * minDelay) + 1 + 's';
+    bubble.style.animationDelay = (i * minDelay) + 0.5 + 's';
 
         // 애니메이션 시작과 함께 투명도를 원래 값으로 변경
         setTimeout(() => {
-          bubble.style.opacity = '0';
+          bubble.style.opacity = '1';
         }, (i * minDelay) * 1000 + 500);
     
     bubble.style.animationDuration = (15) + 's';
