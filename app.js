@@ -76,6 +76,9 @@ function createBubble(dataList, i) {
 
   document.getElementById('bubble-container').appendChild(bubble);
 
+    // 버블 생성 시 투명처리
+    bubble.style.opacity = '0';
+
   // 화면 외부에 버블 배치
   bubble.style.transform = 'translateY(100%)';
 
@@ -87,6 +90,12 @@ function createBubble(dataList, i) {
     const minDelay = 4;
     bubble.classList.add('animation');
     bubble.style.animationDelay = (i * minDelay) + 1 + 's';
+
+        // 애니메이션 시작과 함께 투명도를 원래 값으로 변경
+        setTimeout(() => {
+          bubble.style.opacity = '1';
+        }, (i * minDelay) * 1000 + 500);
+    
     bubble.style.animationDuration = (15) + 's';
   }, 100);
 
