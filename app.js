@@ -80,7 +80,7 @@ function createBubble(dataList, i) {
     bubble.style.opacity = '0';
 
   // 화면 외부에 버블 배치
-  bubble.style.transform = 'translateY(100%)';
+  bubble.style.transform = 'translateY(120%)';
 
   setTimeout(function() {
     const bubbleContainerEl = document.getElementById('bubble-container');
@@ -93,7 +93,7 @@ function createBubble(dataList, i) {
 
         // 애니메이션 시작과 함께 투명도를 원래 값으로 변경
         setTimeout(() => {
-          bubble.style.opacity = '1';
+          bubble.style.opacity = '0';
         }, (i * minDelay) * 1000 + 500);
     
     bubble.style.animationDuration = (15) + 's';
