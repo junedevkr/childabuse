@@ -5,6 +5,7 @@
 
 
 body {
+  background-color: rgb(10,10,10);
   margin: 0;
   font-family: "Nanum Myeongjo", serif;
   display: flex;
@@ -82,7 +83,6 @@ a:hover {
 }
 
 .overlay {
-  background-color: rgb(48, 48, 48);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
@@ -90,7 +90,6 @@ a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  filter: grayscale(100%) brightness(30%);
   -webkit-background-size: cover;
 }
 
@@ -107,6 +106,10 @@ a:hover {
   display: inline-block;
   text-align: center;
   background-color: white;
+}
+
+.contents {
+  height: 100%;
 }
 
 .data-output {
