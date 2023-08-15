@@ -82,7 +82,7 @@ a:hover {
 }
 
 .overlay {
-  background-image: url('./bg.jpg');
+  background-color: rgb(48, 48, 48);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
