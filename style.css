@@ -99,7 +99,8 @@ a:hover {
 }
 
 .border {
-  border: 1px solid #000;
+  width: 90vw;
+  height: 1500px;
   border-radius: 5px;
   padding: 0px;
   margin: -10px;
@@ -114,6 +115,11 @@ a:hover {
 
 .data-output {
   display: inline;
+}
+
+.footer {
+  color: red;
+  display:block;
 }
 
 /* 스마트폰 */
