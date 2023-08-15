@@ -76,6 +76,8 @@ function createBubble(dataList, i) {
 
   document.getElementById('bubble-container').appendChild(bubble);
 
+  // 화면 외부에 버블 배치
+  bubble.style.top = '100%';
 
   setTimeout(function() {
     const bubbleContainerEl = document.getElementById('bubble-container');
@@ -85,7 +87,7 @@ function createBubble(dataList, i) {
     const minDelay = 4;
     bubble.classList.add('animation');
     bubble.style.animationDelay = (i * minDelay) + 's';
-    bubble.style.animationDuration = (Math.random() * 15 + 16) + 's';
+    bubble.style.animationDuration = (15) + 's';
   }, 100);
 
   bubble.addEventListener('animationend', function() {
