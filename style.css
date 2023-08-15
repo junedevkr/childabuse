@@ -54,12 +54,12 @@ h4 {
 }
 
 h5 {
-  font-size: 1.0rem;
+  font-size: 0.8rem;
   color: rgb(182, 182, 182);
 }
 
 h6 {
-  font-size: rem;
+  font-size: 0.6rem;
   color: rgb(182, 182, 182);
 }
 
@@ -132,7 +132,7 @@ a:hover {
 
 .bubble {
   position: absolute;
-  bottom: -100px;
+  bottom: -200px;
   font-size: 1.0rem;
   background-color: white;
   padding: 10px 10px 10px 10px;
@@ -169,6 +169,9 @@ a:hover {
 @media (max-width: 767px) {
   body {
     padding: 0 16px;
+  }
+  .bubble {
+    font-size: 0.8rem;
   }
 }
 
