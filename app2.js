@@ -62,44 +62,33 @@ function fetchData() {
     });
 }
 
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function createBubble(dataList, i) {
+function createBubble(dataList) {
   const randomIndex = getRandomInt(0, dataList.length - 1);
   const randomValue = dataList[randomIndex][0];
 
   var bubble = document.createElement('div');
   bubble.textContent = randomValue;
   bubble.className = 'bubble';
+  bubble.style.left = getRandomInt(0, 90) + '%';
 
   document.getElementById('bubble-container').appendChild(bubble);
 
-  // 화면 외부에 버블 배치
-  bubble.style.transform = 'translateY(100%)';
-  bubble.style.opacity = '0';
-
-  const animationDuration = 18; // 애니메이션 지속 시간
-
-  setTimeout(function() {
-    const bubbleContainerEl = document.getElementById('bubble-container');
-    const maxWidthPercentage = 100 - (bubble.offsetWidth / bubbleContainerEl.offsetWidth) * 100;
-
-    if (i % 2 === 0) {
-      bubble.style.left = '0%';
-    } else {
-      bubble.style.left = 'auto';
-      bubble.style.right = '0%';
-    }
-
-    bubble.classList.add('animation');
-    bubble.style.animationDelay = i * (animationDuration * 1000 + 3000) / 1000 + 's';
-    bubble.style.animationDuration = animationDuration + 's';
-  }, i === 0 ? 0 : 100); // 첫 번째 버블이면 딜레이 없음
-
-  setTimeout(() => {
+  bubble.addEventListener('animationend', () => {
     bubble.remove();
-    createBubble(dataList, i);
-  }, (animationDuration * 1000) + 3000);
+  });
+
+  bubble.style.animationDuration = '3s';
 }
+
+function initData() {
+  fetchData().then(dataList => {
+      createBubble(dataList);
+    });
+}
+
+initData();
