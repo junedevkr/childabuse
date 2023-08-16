@@ -80,35 +80,49 @@ function createBubble(dataList, i) {
   bubble.style.transform = 'translateY(100%)';
   bubble.style.opacity = '0';
 
+  const animationDuration = 18; // 애니메이션 지속 시간
 
   setTimeout(function() {
     const bubbleContainerEl = document.getElementById('bubble-container');
     const maxWidthPercentage = 100 - (bubble.offsetWidth / bubbleContainerEl.offsetWidth) * 100;
-    bubble.style.left = Math.random() * maxWidthPercentage + '%';
+    bubble.style.left = (i % 2 === 0) ? '0%' : `${maxWidthPercentage / 2}%`;
 
     // Y축 상의 겹치지 않는 간격 유지 (버블 높이의 1.5배)
-    const nonOverlappingSpacing = 1.5 * bubble.offsetHeight;
-    const topOffset = nonOverlappingSpacing * i;
+    const topOffset = 100 * i;
     bubble.style.transform = `translateY(${topOffset}px)`    
 
-
-    const minDelay = 1;
     bubble.classList.add('animation');
-    bubble.style.animationDelay = (i * minDelay) + 2 + 's';
+
+    const minDelay = i === 0 ? 0 : 1;
+    bubble.classList.add('animation');
+    bubble.style.animationDelay = i === 0 ? '0s' : ((i * 2) + (bubbleCount - i) * 2) + 's';
 
         // 애니메이션 시작과 함께 투명도를 원래 값으로 변경
         setTimeout(() => {
           bubble.style.opacity = '1';
         }, (i * minDelay) * 1000 + 500);
+        
+        let delay;
+        if (i === 0) {
+          delay = 0; // 첫 번째 버블
+        } else if (i === 1) {
+          delay = animationDuration - 2; // 두 번째 버블을 첫 번째 버블과 가까이 함께
+        } else {
+          delay = (i - 1) * (animationDuration + 2); // 그 외의 버블
+        }
+      
+        bubble.style.animationDelay = delay + 's';
+        
+      
+        bubble.style.animationDuration = animationDuration + 's';
+      }, i === 0 ? 0 : 100); // 첫 번째 버블이면 딜레이 없음
     
-    bubble.style.animationDuration = (15) + 's';
-  }, 100);
-
-  bubble.addEventListener('animationend', function() {
+  setTimeout(() => {
     bubble.remove();
     createBubble(dataList, i);
-  });
+  }, (animationDuration * 1000) + 3000);
 }
+
 
 function initData() {
   fetchData().then(dataList => {
