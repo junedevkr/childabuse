@@ -72,7 +72,6 @@ a:hover {
 }
 
 .container {
-  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -131,8 +130,8 @@ a:hover {
 }
 
 .footer {
-  display:flex;
   text-align: center;
+  margin-bottom: 2vh;
 }
 
 /* bubbles */
@@ -153,10 +152,35 @@ a:hover {
   min-width: 30vw;
   max-width: 50vw;
   text-align: left;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation-name: slide-up;
+  animation-duration: 18s;
+  animation-delay: 0s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .animation {
   animation: floatBubble 5s linear forwards;
+}
+
+@keyframes slide-up {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -50%;
+  }
+  100% {
+    top: -50%;
+  }
+}
+
+
+@keyframes bubble-animation {
+  0% {
+    top: 0;
+  }
 }
 
 @keyframes bubble {
