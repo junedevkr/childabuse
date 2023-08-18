@@ -71,7 +71,7 @@ body {
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 390px) {
   ul {
     display: block;
     flex-direction: column;
