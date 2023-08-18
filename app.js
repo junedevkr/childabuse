@@ -1,105 +1,123 @@
+fetch('./footer.html')
+.then(response => response.text())
+.then(data => {
+  document.getElementById('footerContainer').innerHTML = data;
+})
+.catch(error => {
+  console.error('푸터 파일을 불러오는 데 실패했습니다:', error);
+});
 
 
-function start() {
-  gapi.load('client', function() {
-    // API를 사용하려면 sheetApi.js 파일에 저장된 API 키를 대체하세요.
-    gapi.client.setApiKey('AIzaSyBGVBkEXJc3KkCsBDCmusiAhY8PEUbpNhI');
-    gapi.client.load('sheets', 'v4', function() {
-      getData();
-    });
+let currentDataIndex = 0;
+loadInitialData();
+const list = document.getElementById("list");
+list.addEventListener("scroll", trackScrolling);
+
+async function fetchData(start, count = 1) {
+  const response = await fetch(
+    `https://script.google.com/macros/s/AKfycbwmZS0tXGIUbKEGl-hY_1VSK7ZcTAZdxcQ6qFlqHDCohwPR8Dp6xHQiupPWgGKIgqwE3A/exec?start=${start}&count=${count}`
+  );
+  const data = await response.text();
+  const items = data.split("\n").filter((item) => item.trim() !== "");
+  return items;
+}
+
+async function loadInitialData() {
+  const items = await fetchData(currentDataIndex, 20);
+  items.forEach((item, index) => {
+    displayItem(item, index);
+  });
+  currentDataIndex += 20;
+}
+
+async function fetchDatalist() {
+  fetch("https://script.google.com/macros/s/AKfycbwqcM4ef8loJCR6rtpSJe7_67y83WxtEGPIUg8nrH3i-LWnBMYAynP7bJKGsTXDlzFGHw/exec")
+      .then(response => response.text())
+      .then(data => {
+          const resultElement = document.getElementById("result");
+          resultElement.textContent = data;
+      })
+      .catch(error => {
+          console.error("Error fetching data:", error);
   });
 }
 
+async function start() {
+  await loadInitialData();
+  await fetchDatalist();
+}
+start();
 
-document.addEventListener('DOMContentLoaded', function() {
-  start();
-});
 
-async function loadHTML(url, containerId) {
-  try {
-    const response = await fetch(url);
-    const html = await response.text();
-    document.getElementById(containerId).innerHTML = html;
-  } catch (err) {
-    console.error('Error loading ' + url, err);
+function displayItem(item, index) {
+  const listItem = document.createElement("li");
+  listItem.textContent = item;
+  listItem.setAttribute("data-index", index);
+  list.appendChild(listItem);
+}
+
+let isLoading = false;
+
+async function loadAdditionalData() {
+  const lastIndex = parseInt(
+    list.lastChild.getAttribute("data-index"),
+    10
+  );
+  const newIndexOdd = lastIndex + 1; // 홀수 인덱스 데이터
+  const newIndexEven = lastIndex + 2; // 짝수 인덱스 데이터
+
+  const newItemOdd = await fetchData(newIndexOdd, 1);
+  const newItemEven = await fetchData(newIndexEven, 1);
+
+  if (newItemOdd.length > 0) {
+    displayItem(newItemOdd[0], newIndexOdd);
+  }
+
+  if (newItemEven.length > 0) {
+    displayItem(newItemEven[0], newIndexEven);
+  }
+
+  isLoading = false;
+}
+
+let lastScrollUpdate = 0; 
+
+function trackScrolling() {
+  const now = performance.now();
+  if (lastScrollUpdate + 1000 > now) {
+      return;
+  }
+  lastScrollUpdate = now;
+// 스크롤할 때 마다 박스가 두 개씩 사라지도록 조절하는 부분
+  const deleteWhen = 2;
+
+  const firstBoxTop = list.firstChild.getBoundingClientRect().top;
+  if (firstBoxTop + list.firstChild.offsetHeight * deleteWhen < 0 && !isLoading) {
+      list.removeChild(list.firstChild);
+      list.removeChild(list.firstChild);
+      loadAdditionalData(); // 2개의 데이터를 다시 추가합니다.
+  }
+
+  const pos = list.lastChild.getBoundingClientRect();
+
+  if (pos.bottom <= window.innerHeight * 0.7 && !isLoading) {
+    isLoading = true;
+    loadAdditionalData().then(() => {
+      isLoading = false;
+    });
+  }
+
+  // 상단에서 2개의 데이터가 사라지면 새로운 데이터 2개 불러옴
+  if (
+    list.firstChild.getBoundingClientRect().bottom <
+    window.innerHeight * 0.2
+  ) {
+    list.removeChild(list.firstChild);
+    list.removeChild(list.firstChild);
+    loadAdditionalData();
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadHTML('header.html', 'header-container');
-  loadHTML('footer.html', 'footer-container');
-});
+list.addEventListener("scroll", trackScrolling);
 
-function getData() {
-  var range = 'Sheet2!A1:A'; // 이 부분을 수정하여 원하는 시트 및 범위를 가져옵니다.
 
-  gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1_5nQoggV38Y62T5JQfdOUL1RtxFaO6cdQFhh7IEsOlc',
-    range: range
-  }).then(function(response) {
-    var numRows = response.result.values.length;
-    document.getElementById('data-output').innerHTML = "현재 접수된 신고서 " + numRows + "건";
-  }, function(response) {
-    console.error('Error occurred: ' + response.result.error.message);
-  });
-}
-
-const apiKey = 'AIzaSyBGVBkEXJc3KkCsBDCmusiAhY8PEUbpNhI'; // 여기에 API 키를 입력하세요.
-const sheetId = '1_5nQoggV38Y62T5JQfdOUL1RtxFaO6cdQFhh7IEsOlc'; // 여기에 스프레드 시트 ID를 입력하세요.
-const sheetName = 'Sheet2';
-const cellRange = 'A1:A';
-const bubbleCount = 7;
-
-function fetchData() {
-  return fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}!${cellRange}?key=${apiKey}`)
-    .then(response => response.json())
-    .then(json => {
-      if (json.error) {
-        console.error(json.error);
-        return [];
-      }
-      return json.values;
-    });
-}
-
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function createBubble(dataList, i) {
-  const randomIndex = getRandomInt(0, dataList.length - 1);
-  const randomValue = dataList[randomIndex][0];
-
-  var bubble = document.createElement('div');
-  bubble.textContent = randomValue;
-  bubble.className = 'bubble';
-
-  document.getElementById('bubble-container').appendChild(bubble);
-
-  // 화면 외부에 버블 배치
-  bubble.style.transform = 'translateY(100%)';
-  bubble.style.opacity = '0';
-
-  const animationDuration = 18; // 애니메이션 지속 시간
-
-  setTimeout(function() {
-    const bubbleContainerEl = document.getElementById('bubble-container');
-    const maxWidthPercentage = 100 - (bubble.offsetWidth / bubbleContainerEl.offsetWidth) * 100;
-
-    if (i % 2 === 0) {
-      bubble.style.left = '0%';
-    } else {
-      bubble.style.left = 'auto';
-      bubble.style.right = '0%';
-    }
-
-    bubble.classList.add('animation');
-    bubble.style.animationDelay = i * (animationDuration * 1000 + 3000) / 1000 + 's';
-    bubble.style.animationDuration = animationDuration + 's';
-  }, i === 0 ? 0 : 100); // 첫 번째 버블이면 딜레이 없음
-
-  setTimeout(() => {
-    bubble.remove();
-    createBubble(dataList, i);
-  }, (animationDuration * 1000) + 3000);
-}

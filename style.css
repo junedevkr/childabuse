@@ -16,6 +16,75 @@ body {
   width: 100vw;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      overflow: auto;
+      height: 80vh;
+    }
+
+    li {
+  font-size: 0.8rem;
+  list-style: none;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 80px 0;
+  position: relative;
+  left: 0;
+  opacity: 1;
+  transition: all 0.5s;
+  color: white;
+  box-sizing: border-box; /* 패딩의 크기를 포함하여 요소 너비를 결정합니다. */
+    }
+
+    li:nth-child(even) {
+      left: 20%;
+    }
+
+    li:nth-child(odd) {
+    left: 50%;
+    }   
+
+::-webkit-scrollbar {
+  width: 0px; /* 웹킷 기반 브라우저에서 스크롤 바를 숨깁니다. */
+  background: transparent; /* 스크롤 바의 배경색을 투명하게 합니다. */
+}
+
+.list{
+  justify-content: center;
+  align-items: center;
+}
+
+#list {
+  scroll-behavior: smooth; /* 부드러운 스크롤 효과를 추가합니다. */
+}
+
+
+
+@media (max-width: 768px) {
+  ul {
+    display: block;
+    flex-direction: column;
+    width: 90vw;
+  }
+  li {
+    width: 80vw;
+    display: block;
+    align-items: center;
+  }
+
+}
+
 header {
   width: 100%;
   display: flex;
@@ -23,7 +92,7 @@ header {
 }
   
 h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: rgb(216, 0, 0);
 }
 
@@ -43,7 +112,7 @@ h3 {
   color: rgb(182, 182, 182);
 }
 
-h3.h3red {
+h3.green {
   font-size: 1.5rem;
   color: #9dff00;
 }
@@ -77,17 +146,7 @@ a:hover {
   position: relative;
   z-index: 1;
   min-height: 80%;
-  margin: auto;
-  margin-top: 2vh;
-  text-align: center;
-}
-
-.container2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+  max-heith: 100vh;
   margin: auto;
   margin-top: 2vh;
   text-align: center;
@@ -131,113 +190,25 @@ a:hover {
 
 .footer {
   text-align: center;
-  margin-bottom: 2vh;
+  height: 100px;
+
 }
 
-/* bubbles */
-.bubble-container {
-  position: relative;
-  width: 80vw;
-  height: 70vh;
+
+#result {
+  display: inline;
+    width: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 
-.bubble {
-  position: absolute;
-  bottom: -100px;
-  font-size: 1.0rem;
-  color: white;
-  padding: 10px 10px 10px 10px;
-  border-radius: 5px;
-  min-width: 30vw;
-  max-width: 50vw;
-  text-align: left;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  animation-name: slide-up;
-  animation-duration: 18s;
-  animation-delay: 0s;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-}
-
-.animation {
-  animation: floatBubble 5s linear forwards;
-}
-
-@keyframes slide-up {
-  0% {
-    top: 0;
-  }
-  50% {
-    top: -50%;
-  }
-  100% {
-    top: -50%;
-  }
-}
 
 
-@keyframes bubble-animation {
-  0% {
-    top: 0;
-  }
-}
 
-@keyframes bubble {
-  0% {
-      transform: translateY(100%);
-  }
-  100% {
-      transform: translateY(calc(-100% - var(--endY))); /* 종료 위치를 상단 0~20% 사이의 랜덤 값으로 변경 */
-  }
-}
-
-
-@keyframes floatBubble {
-  0% {
-    bottom: -50%;
-    opacity: 0;
-  }
-
-  10% {
-    bottom: 10%;
-    opacity: 0;
-  }
-
-  25% {
-    bottom: 25%;
-    opacity: 0.3;
-  }
-
-  50% {
-    bottom: 50%;
-    opacity: 1;
-  }
-
-
-  75% {
-    bottom: 75%;
-    opacity: 0.3;
-  }
-
-  90% {
-    bottom: 90%;
-    opacity: 0;
-  }
-
-  100% {
-    bottom: 100%;
-    opacity: 0;
-  }
-}
 /* 스마트폰 */
 @media (max-width: 767px) {
   body {
     padding: 0 16px;
-  }
-  .bubble {
-    font-size: 0.8rem;
-    bottom: -200px;
   }
 }
 
