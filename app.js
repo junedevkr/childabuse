@@ -89,11 +89,10 @@ function trackScrolling() {
   }
   lastScrollUpdate = now;
 // 스크롤할 때 마다 박스가 두 개씩 사라지도록 조절하는 부분
-  const deleteWhen = 2;
+  const deleteWhen = 1;
 
   const firstBoxTop = list.firstChild.getBoundingClientRect().top;
   if (firstBoxTop + list.firstChild.offsetHeight * deleteWhen < 0 && !isLoading) {
-      list.removeChild(list.firstChild);
       list.removeChild(list.firstChild);
       loadAdditionalData(); // 2개의 데이터를 다시 추가합니다.
   }
@@ -110,9 +109,8 @@ function trackScrolling() {
   // 상단에서 2개의 데이터가 사라지면 새로운 데이터 2개 불러옴
   if (
     list.firstChild.getBoundingClientRect().bottom <
-    window.innerHeight * 0.2
+    window.innerHeight * 0.1
   ) {
-    list.removeChild(list.firstChild);
     list.removeChild(list.firstChild);
     loadAdditionalData();
   }

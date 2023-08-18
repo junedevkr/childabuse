@@ -34,7 +34,7 @@ body {
     li {
   font-size: 0.8rem;
   list-style: none;
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,15 +44,14 @@ body {
   opacity: 1;
   transition: all 0.5s;
   color: white;
-  box-sizing: border-box; /* 패딩의 크기를 포함하여 요소 너비를 결정합니다. */
     }
 
     li:nth-child(even) {
-      left: 20%;
+      left: 10%;
     }
 
     li:nth-child(odd) {
-    left: 50%;
+      left: 50%;
     }   
 
 ::-webkit-scrollbar {
@@ -78,10 +77,16 @@ body {
     width: 95vw;
   }
   li {
-    width: 95vw;
-    display: block;
+    width: 100%;
     align-items: center;
   }
+  li:nth-child(even) {
+    width: 100%;
+  }
+
+  li:nth-child(odd) {
+    left: 50%;
+  }   
 
 }
 
