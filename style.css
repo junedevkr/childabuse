@@ -71,14 +71,14 @@ body {
 
 
 
-@media (max-width: 390px) {
+@media (max-width: 389px) {
   ul {
     display: block;
     flex-direction: column;
-    width: 90vw;
+    width: 95vw;
   }
   li {
-    width: 80vw;
+    width: 95vw;
     display: block;
     align-items: center;
   }
