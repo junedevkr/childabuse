@@ -24,12 +24,11 @@ async function fetchData(start, count = 1) {
 
 async function loadInitialData() {
   const items = await fetchData(currentDataIndex, 20);
-  items.reverse().forEach((item, index) => { // 데이터 배열을 역순으로 변경합니다.
+  items.forEach((item, index) => {
     displayItem(item, index);
   });
   currentDataIndex += 20;
 }
-
 
 async function fetchDatalist() {
   fetch("https://script.google.com/macros/s/AKfycbwqcM4ef8loJCR6rtpSJe7_67y83WxtEGPIUg8nrH3i-LWnBMYAynP7bJKGsTXDlzFGHw/exec")
@@ -54,14 +53,6 @@ function displayItem(item, index) {
   const listItem = document.createElement("li");
   listItem.textContent = item;
   listItem.setAttribute("data-index", index);
-
-  // 홀수/짝수 인덱스에 따라 클래스를 추가합니다.
-  if (index % 2 === 0) {
-    listItem.classList.add("even");
-  } else {
-    listItem.classList.add("odd");
-  }
-
   list.appendChild(listItem);
 }
 
@@ -97,16 +88,8 @@ function trackScrolling() {
       return;
   }
   lastScrollUpdate = now;
-  
-  // 스크롤할 때 마다 박스가 두 개씩 사라지도록 조절하는 부분
+// 스크롤할 때 마다 박스가 두 개씩 사라지도록 조절하는 부분
   const deleteWhen = 2;
-  const additionalDataCount = 2;
-
-  // 박스 삭제를 방지하기 위해 firstChild가 상단에 닿으면 return 처리
-  if (list.firstChild.getBoundingClientRect().top >= 0) {
-    return;
-  }
-
 
   const firstBoxTop = list.firstChild.getBoundingClientRect().top;
   if (firstBoxTop + list.firstChild.offsetHeight * deleteWhen < 0 && !isLoading) {
@@ -124,7 +107,15 @@ function trackScrolling() {
     });
   }
 
-
+  // 상단에서 2개의 데이터가 사라지면 새로운 데이터 2개 불러옴
+  if (
+    list.firstChild.getBoundingClientRect().bottom <
+    window.innerHeight * 0.2
+  ) {
+    list.removeChild(list.firstChild);
+    loadAdditionalData();
+    loadAdditionalData();
+  }
 }
 
 list.addEventListener("scroll", trackScrolling);

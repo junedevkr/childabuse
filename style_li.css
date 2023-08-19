@@ -1,0 +1,231 @@
+/* 기본 스타일 설정 */
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: rgb(10,10,10);
+  margin: 0;
+  font-family: "Nanum Myeongjo", serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+  width: 100vw;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+    ul#list {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      overflow: auto;
+      height: 75vh;
+    }
+
+    ul#list li {
+  font-size: 0.8rem;
+  list-style: none;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 80px 0;
+  position: relative;
+  left: 0;
+  opacity: 1;
+  transition: all 0.5s;
+  color: white;
+    }
+
+    ul#list li.even {
+      left: 10%;
+    }
+
+    ul#list li.odd {
+      left: 50%;
+    }   
+
+::-webkit-scrollbar {
+  width: 0px; /* 웹킷 기반 브라우저에서 스크롤 바를 숨깁니다. */
+  background: transparent; /* 스크롤 바의 배경색을 투명하게 합니다. */
+}
+
+.list{
+  justify-content: center;
+  align-items: center;
+}
+
+#list {
+  scroll-behavior: smooth; /* 부드러운 스크롤 효과를 추가합니다. */
+}
+
+
+
+@media (max-width: 389px) {
+  ul#list {
+    display: block;
+    flex-direction: column;
+    width: 95vw;
+  }
+  ul#list li {
+    width: 100%;
+    align-items: center;
+  }
+  ul#list li.even {
+    width: 100%;
+  }
+
+  ul#list li.odd {
+    left: 50%;
+  }   
+
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+  
+h1 {
+  font-size: 1.8rem;
+  color: rgb(216, 0, 0);
+}
+
+section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: rgb(182, 182, 182);
+}
+
+h3.green {
+  font-size: 1.5rem;
+  color: #9dff00;
+}
+
+h4 {
+  font-size: 1.0rem;
+  color: rgb(182, 182, 182);
+}
+
+h5 {
+  font-size: 0.8rem;
+  color: rgb(182, 182, 182);
+}
+
+h6 {
+  font-size: 0.6rem;
+  color: rgb(182, 182, 182);
+}
+
+a {
+  color: rgb(182, 182, 182);
+}
+
+a:hover {
+  color: white;
+}
+
+.container {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  min-height: 80%;
+  max-heith: 100vh;
+  margin: auto;
+  margin-top: 0.5vh;
+  text-align: center;
+}
+
+.overlay {
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-background-size: cover;
+}
+
+.vertical-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.border {
+  width: 90vw;
+  border-radius: 5px;
+  padding: 0px;
+  margin: -10px;
+  display: inline-block;
+  text-align: center;
+  background-color: white;
+}
+
+.contents {
+  height: 100%;
+}
+
+.data-output {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  height: 100px;
+
+}
+
+
+#result {
+  display: inline;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+
+
+/* 스마트폰 */
+@media (max-width: 767px) {
+  body {
+    padding: 0 16px;
+  }
+}
+
+/* 태블릿 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  body {
+    padding: 0 32px;
+  }
+}
+
+/* PC */
+@media (min-width: 1024px) {
+  body {
+    padding: 0 48px;
+  }
+}

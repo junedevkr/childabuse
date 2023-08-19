@@ -24,12 +24,11 @@ async function fetchData(start, count = 1) {
 
 async function loadInitialData() {
   const items = await fetchData(currentDataIndex, 20);
-  items.reverse().forEach((item, index) => { // 데이터 배열을 역순으로 변경합니다.
+  items.forEach((item, index) => {
     displayItem(item, index);
   });
   currentDataIndex += 20;
 }
-
 
 async function fetchDatalist() {
   fetch("https://script.google.com/macros/s/AKfycbwqcM4ef8loJCR6rtpSJe7_67y83WxtEGPIUg8nrH3i-LWnBMYAynP7bJKGsTXDlzFGHw/exec")
@@ -54,14 +53,6 @@ function displayItem(item, index) {
   const listItem = document.createElement("li");
   listItem.textContent = item;
   listItem.setAttribute("data-index", index);
-
-  // 홀수/짝수 인덱스에 따라 클래스를 추가합니다.
-  if (index % 2 === 0) {
-    listItem.classList.add("even");
-  } else {
-    listItem.classList.add("odd");
-  }
-
   list.appendChild(listItem);
 }
 
