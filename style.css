@@ -203,11 +203,13 @@ a:hover {
 #result {
   display: inline;
     width: 100%;
-  height: 100vh;
   overflow: hidden;
 }
 
-
+#selfreport {
+  display: inline;
+  color: red;
+}
 
 
 /* 스마트폰 */
@@ -230,3 +232,4 @@ a:hover {
     padding: 0 48px;
   }
 }
+
