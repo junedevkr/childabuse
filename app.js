@@ -94,38 +94,21 @@ let lastScrollUpdate = 0;
 function trackScrolling() {
   const now = performance.now();
   if (lastScrollUpdate + 1000 > now) {
-      return;
-  }
-  lastScrollUpdate = now;
-  
-  // 스크롤할 때 마다 박스가 두 개씩 사라지도록 조절하는 부분
-  const deleteWhen = 2;
-  const additionalDataCount = 2;
-
-  // 박스 삭제를 방지하기 위해 firstChild가 상단에 닿으면 return 처리
-  if (list.firstChild.getBoundingClientRect().top >= 0) {
     return;
   }
-
-
-  const firstBoxTop = list.firstChild.getBoundingClientRect().top;
-  if (firstBoxTop + list.firstChild.offsetHeight * deleteWhen < 0 && !isLoading) {
-      list.removeChild(list.firstChild);
-      loadAdditionalData();
-      loadAdditionalData(); // 2개의 데이터를 다시 추가합니다.
-  }
+  lastScrollUpdate = now;
 
   const pos = list.lastChild.getBoundingClientRect();
 
+  // 스크롤이 일정 위치에 닿았을 때 박스 추가
   if (pos.bottom <= window.innerHeight * 0.7 && !isLoading) {
     isLoading = true;
     loadAdditionalData().then(() => {
       isLoading = false;
     });
   }
-
-
 }
+
 
 list.addEventListener("scroll", trackScrolling);
 
